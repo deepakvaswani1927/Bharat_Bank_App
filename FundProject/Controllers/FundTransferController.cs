@@ -29,8 +29,15 @@ namespace FundTransferAPI.Controllers
         [HttpPost]
         public async  Task<ActionResult<FundTransfer>> PostImps(FundTransfer fundTransfer)
         {
-            var _fundTransfer = await _repo.AddImps(fundTransfer);
-            return Created("Added", _fundTransfer);
+            try
+            {
+                var _fundTransfer = await _repo.AddImps(fundTransfer);
+                return Created("Added", _fundTransfer);
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.Message)
+            }
 
         }
    
